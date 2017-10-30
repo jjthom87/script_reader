@@ -31,38 +31,40 @@ var commands = new Commands();
 
 app.use('/static', express.static('client'));
 
-// setInterval(function(){
-// 	fs.readFile(process.cwd() + '/client/public/history_log.txt', 'utf-8', function(err,body){
-// 		ScriptsSchema.findOne({"_id": recordId}).exec(function(err,scriptsDoc){
-// 			if(scriptsDoc.script !== body){
-// 				ScriptsSchema.findOneAndUpdate({"_id": recordId}, {'script': body}).exec(function(err,updateDoc){
-// 					console.log("Doc Updated")
-// 				});
-// 				var filter = body.split("\n").filter((s) => {
-// 					return s.indexOf("bash-3.2$") > -1
-// 				})
-// 				for(var i = 0; i < filter.length; i++){
-// 					filter[i] = filter[i].split("bash-3.2$ ")[1].split("\r")[0].split(" ")[0];
-// 				}
-// 				filter.forEach((f) => {
-// 					switch(f){
-// 						case 'cd':
-// 							commands.cd++;
-// 							break;
-// 						case 'ls':
-// 							commands.ls++;
-// 							break;
-// 						case 'pwd':
-// 							commands.pwd++;
-// 							break;
-// 					}
-// 				});
-// 				CommandsSchema.insertMany(commands);
-// 				commands = new Commands();
-// 			}
-// 		});
-// 	});
-// }, 2000);
+if(process.env.LOCAL){
+	setInterval(function(){
+		fs.readFile(process.cwd() + '/client/public/history_log.txt', 'utf-8', function(err,body){
+			ScriptsSchema.findOne({"_id": recordId}).exec(function(err,scriptsDoc){
+				if(scriptsDoc.script !== body){
+					ScriptsSchema.findOneAndUpdate({"_id": recordId}, {'script': body}).exec(function(err,updateDoc){
+						console.log("Doc Updated")
+					});
+					var filter = body.split("\n").filter((s) => {
+						return s.indexOf("bash-3.2$") > -1
+					})
+					for(var i = 0; i < filter.length; i++){
+						filter[i] = filter[i].split("bash-3.2$ ")[1].split("\r")[0].split(" ")[0];
+					}
+					filter.forEach((f) => {
+						switch(f){
+							case 'cd':
+								commands.cd++;
+								break;
+							case 'ls':
+								commands.ls++;
+								break;
+							case 'pwd':
+								commands.pwd++;
+								break;
+						}
+					});
+					CommandsSchema.insertMany(commands);
+					commands = new Commands();
+				}
+			});
+		});
+	}, 2000);
+}
 
 app.get('/', function(req,res){
 	res.sendFile(path.join(__dirname, '../client/public/index.html'));

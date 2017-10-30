@@ -30,38 +30,38 @@ function Commands(){
 
 var commands = new Commands();
 
-setInterval(function(){
-	fs.readFile('../../../history_log.txt', 'utf-8', function(err,body){
-		ScriptsSchema.findOne({"_id": recordId}).exec(function(err,scriptsDoc){
-			if(scriptsDoc.script !== body){
-				ScriptsSchema.findOneAndUpdate({"_id": recordId}, {'script': body}).exec(function(err,updateDoc){
-					console.log("Doc Updated")
-				});
-				var filter = body.split("\n").filter((s) => {
-					return s.indexOf("bash-3.2$") > -1
-				})
-				for(var i = 0; i < filter.length; i++){
-					filter[i] = filter[i].split("bash-3.2$ ")[1].split("\r")[0].split(" ")[0];
-				}
-				filter.forEach((f) => {
-					switch(f){
-						case 'cd':
-							commands.cd++;
-							break;
-						case 'ls':
-							commands.ls++;
-							break;
-						case 'pwd':
-							commands.pwd++;
-							break;
-					}
-				});
-				CommandsSchema.insertMany(commands);
-				commands = new Commands();
-			}
-		});
-	});
-}, 2000);
+// setInterval(function(){
+// 	fs.readFile('../../../history_log.txt', 'utf-8', function(err,body){
+// 		ScriptsSchema.findOne({"_id": recordId}).exec(function(err,scriptsDoc){
+// 			if(scriptsDoc.script !== body){
+// 				ScriptsSchema.findOneAndUpdate({"_id": recordId}, {'script': body}).exec(function(err,updateDoc){
+// 					console.log("Doc Updated")
+// 				});
+// 				var filter = body.split("\n").filter((s) => {
+// 					return s.indexOf("bash-3.2$") > -1
+// 				})
+// 				for(var i = 0; i < filter.length; i++){
+// 					filter[i] = filter[i].split("bash-3.2$ ")[1].split("\r")[0].split(" ")[0];
+// 				}
+// 				filter.forEach((f) => {
+// 					switch(f){
+// 						case 'cd':
+// 							commands.cd++;
+// 							break;
+// 						case 'ls':
+// 							commands.ls++;
+// 							break;
+// 						case 'pwd':
+// 							commands.pwd++;
+// 							break;
+// 					}
+// 				});
+// 				CommandsSchema.insertMany(commands);
+// 				commands = new Commands();
+// 			}
+// 		});
+// 	});
+// }, 2000);
 
 app.get('/', function(req,res){
 	res.sendfile(path.join(__dirname, '../client/public/home.html'));

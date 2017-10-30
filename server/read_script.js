@@ -6,6 +6,8 @@ var express = require('express');
 //express
 var app = express();
 
+console.log(process.env.MLAB_PASS)
+
 //mongoose items
 var CommandsSchema = require('./models/Commands.model.js');
 var ScriptsSchema = require('./models/Scripts.model.js');

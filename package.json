@@ -4,6 +4,7 @@
   "description": "",
   "main": "server/read_script.js",
   "scripts": {
+    "start": "node server/read_script.js",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "author": "",

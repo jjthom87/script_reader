@@ -1,0 +1,20 @@
+Script started on Sun Oct 29 23:21:00 2017
+[?1034hbash-3.2$ cd
+bash-3.2$ ls
+Applications		Movies			eclipse
+Desktop			Music			eclipse-workspace
+Documents		Pictures		genymotion-log.zip
+Downloads		Public			opt
+Library			VirtualBox VMs
+MacKeeper Backups	commitproject
+bash-3.2$ ls
+Applications		Movies			eclipse
+Desktop			Music			eclipse-workspace
+Documents		Pictures		genymotion-log.zip
+Downloads		Public			opt
+Library			VirtualBox VMs
+MacKeeper Backups	commitproject
+bash-3.2$ exit
+exit
+
+Script done on Sun Oct 29 23:21:13 2017

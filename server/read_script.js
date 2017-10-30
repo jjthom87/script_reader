@@ -2,11 +2,10 @@ require('dotenv').config()
 var fs = require('fs');
 var mongoose = require('mongoose');
 var express = require('express');
+var path = require('path');
 
 //express
 var app = express();
-
-console.log(process.env.MLAB_PASS)
 
 //mongoose items
 var CommandsSchema = require('./models/Commands.model.js');
@@ -22,8 +21,6 @@ mongoose.connect(mongourl, function(err,res){
 	}
 });
 
-app.use(express.static('../client/public'));
-
 function Commands(){
 	this.cd = 0;
 	this.ls = 0;
@@ -32,8 +29,10 @@ function Commands(){
 
 var commands = new Commands();
 
+app.use('/static', express.static('client'));
+
 // setInterval(function(){
-// 	fs.readFile('../../../history_log.txt', 'utf-8', function(err,body){
+// 	fs.readFile(process.cwd() + '/client/public/history_log.txt', 'utf-8', function(err,body){
 // 		ScriptsSchema.findOne({"_id": recordId}).exec(function(err,scriptsDoc){
 // 			if(scriptsDoc.script !== body){
 // 				ScriptsSchema.findOneAndUpdate({"_id": recordId}, {'script': body}).exec(function(err,updateDoc){
@@ -66,7 +65,7 @@ var commands = new Commands();
 // }, 2000);
 
 app.get('/', function(req,res){
-	res.sendfile(path.join(__dirname, '../client/public/home.html'));
+	res.sendFile(path.join(__dirname, '../client/public/index.html'));
 });
 
 app.get('/stuff', function(req,res){

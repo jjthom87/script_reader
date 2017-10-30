@@ -9,7 +9,7 @@ var app = express();
 //mongoose items
 var CommandsSchema = require('./models/Commands.model.js');
 var ScriptsSchema = require('./models/Scripts.model.js');
-const mongourl = `mongodb://jjthom87:${process.env.MLABPASS}@ds141242.mlab.com:41242/command_storage`;
+const mongourl = `mongodb://jjthom87:${process.env.MLAB_PASS}@ds141242.mlab.com:41242/command_storage`;
 const recordId = "59f6784b0838b8b6b5a9297c";
 
 mongoose.connect(mongourl, function(err,res){

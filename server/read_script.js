@@ -76,6 +76,10 @@ app.get('/stuff', function(req,res){
 	});
 })
 
+app.get('/stuff/whatever.zip', function(req,res){
+	res.json("Hello")
+})
+
 var PORT = process.env.PORT || 8000;
 
 app.listen(PORT);

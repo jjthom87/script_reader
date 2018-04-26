@@ -1,7 +1,7 @@
-Script started on Sun Oct 29 23:35:03 2017
-[?1034hbash-3.2$ ls
-app.js		history_log.txt	index.html
+Script started on Wed Apr 25 21:45:59 2018
+[?1034hbash-3.2$ cd ../
+bash-3.2$ cd public/
 bash-3.2$ exit
 exit
 
-Script done on Sun Oct 29 23:35:17 2017
+Script done on Wed Apr 25 21:46:08 2018

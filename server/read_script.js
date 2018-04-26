@@ -88,6 +88,7 @@ app.get('/stuff/piccies.zip', function(req,res){
 	res.setHeader('Content-Disposition', 'attachment');
     let fileStream = fs.createReadStream(process.cwd() + '/client/public/piccies.zip');
     fileStream.pipe(res);
+    res.json("Downloaded piccies.zip")
 })
 
 var PORT = process.env.PORT || 8000;

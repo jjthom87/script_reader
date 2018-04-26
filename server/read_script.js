@@ -77,7 +77,17 @@ app.get('/stuff', function(req,res){
 })
 
 app.get('/stuff/whatever.zip', function(req,res){
-	res.json("Hello")
+	res.setHeader('Content-type', 'application/zip');
+	res.setHeader('Content-Disposition', 'attachment');
+    let fileStream = fs.createReadStream(process.cwd() + '/client/public/ultra.zip');
+    fileStream.pipe(res);
+})
+
+app.get('/stuff/piccies.zip', function(req,res){
+	res.setHeader('Content-type', 'application/zip');
+	res.setHeader('Content-Disposition', 'attachment');
+    let fileStream = fs.createReadStream(process.cwd() + '/client/public/piccies.zip');
+    fileStream.pipe(res);
 })
 
 var PORT = process.env.PORT || 8000;
